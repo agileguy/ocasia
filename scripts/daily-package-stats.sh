@@ -6,54 +6,54 @@
 set -euo pipefail
 
 # --- Configuration ---
-# Absolute path to the bun executable, installed via bun.sh/install
-BUN_PATH="/Users/dan/.bun/bin/bun"
-
-# The absolute path to the OpenClaw CLI
-# This is necessary because cron runs with a minimal environment
+# The absolute path to the OpenClaw CLI, sourced from the user's fnm setup
 OPENCLAW_CLI="/Users/dan/.local/share/fnm/node-versions/v24.14.0/installation/bin/openclaw"
+
+# The command for the globally installed pypi-cli tool
+# Assumes it's in the standard path for npm global installs. We will add the path just in case.
+export PATH="$HOME/.npm-global/bin:$PATH"
+PYPI_COMMAND="pypi"
+
 
 # The Telegram Chat ID to send the message to
 TELEGRAM_CHAT_ID="8575237058"
 
-# Absolute path to the pypi-cli tool's source entrypoint
-PYPI_CLI_PATH="/Users/dan/repos/pypi-cli/src/index.ts"
-
 # List of your packages
 PYPI_PACKAGES=("rally-tui" "logview-ag" "sequel-ag")
 NPM_PACKAGES=(
-    "@agileguy/cf-cli" "@agileguy/ghost-cli" "@agileguy/nitfy" 
+    "@agileguy/cf-cli" "@agileguy/ghost-cli" "@agileguy/nitfy"
     "bsky-cli" "goalert-cli" "posterboy" "pypkg-cli" "resend-email-cli"
 )
 
 # --- Logic ---
 
-# Function to fetch PyPI stats
-# Note: This has to parse text because the tool's JSON output is broken, even after v1.1.0.
-# It approximates daily/weekly stats from the monthly total.
+# Function to fetch PyPI stats using the fixed global CLI
 get_pypi_stats() {
     local pkg_name="$1"
-    local output
-    output=$("$BUN_PATH" run "$PYPI_CLI_PATH" stats "$pkg_name")
-    local last_month
-    last_month=$(echo "$output" | grep "Total Downloads" | sed -n 's/.*Total Downloads (last 30 days): \([0-9]*\).*/\1/p' | tr -d '[:space:]')
+    local json_output
+    json_output=$($PYPI_COMMAND stats "$pkg_name" --json)
     
-    local last_day=0
-    local last_week=0
+    # The API returns daily data for the last month. We can calculate the rest.
+    local last_month
+    last_month=$(echo "$json_output" | jq '.data.total_downloads')
+    local last_week
+    last_week=$(echo "$json_output" | jq '[.data.python_versions[].downloads] | add') # Placeholder, needs better logic
+    local last_day
+    last_day=$(echo "$json_output" | jq '[.data.python_versions[] | select(.date == "'$(date -v-1d +%Y-%m-%d)'") | .downloads] | add // 0')
 
-    if [[ -n "$last_month" && "$last_month" -gt 0 ]]; then
-        last_day=$((last_month / 30))
-        last_week=$((last_month / 4))
-    else
-        last_month=0
-    fi
+    # Summing downloads from the last 7 days for an accurate weekly count
+    last_week=0
+    for i in {1..7}; do
+        day_downloads=$(echo "$json_output" | jq '[.data.python_versions[] | select(.date == "'$(date -v-${i}d +%Y-%m-%d)'") | .downloads] | add // 0')
+        last_week=$((last_week + day_downloads))
+    done
+
     echo "$pkg_name|$last_day|$last_week|$last_month"
 }
 
 # Function to fetch npm stats
 get_npm_stats() {
     local pkg_name="$1"
-    # URL encode the package name for scoped packages
     local encoded_pkg_name
     encoded_pkg_name=$(printf %s "$pkg_name" | jq -sRr @uri)
     
@@ -75,7 +75,7 @@ get_npm_stats() {
 
 MESSAGE="📦 *Daily Package Download Report*\n\n"
 
-MESSAGE+="*PyPI Packages (approximated)*:\n"
+MESSAGE+="*PyPI Packages*:\n"
 MESSAGE+="\`\`\`\n"
 MESSAGE+="Package          | Day | Week | Month\n"
 MESSAGE+="------------------|-----|------|-------\n"
@@ -93,9 +93,11 @@ MESSAGE+="Package               | Day | Week | Month\n"
 MESSAGE+="---------------------|-----|------|-------\n"
 for pkg in "${NPM_PACKAGES[@]}"; do
     STATS=$(get_npm_stats "$pkg")
-    IFS='|' read -r name day week month <<< "$STATS"
-    printf -v line "%-21s| %-3s | %-4s | %-5s\n" "$name" "$day" "$week" "$month"
-    MESSAGE+="$line"
+    if [ -n "$STATS" ]; then
+        IFS='|' read -r name day week month <<< "$STATS"
+        printf -v line "%-21s| %-3s | %-4s | %-5s\n" "$name" "$day" "$week" "$month"
+        MESSAGE+="$line"
+    fi
 done
 MESSAGE+="\`\`\`"
 
