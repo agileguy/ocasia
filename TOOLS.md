@@ -38,16 +38,19 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ### Cloudflare (`cf-cli`)
 
-**WARNING:** The bespoke `cf-cli` tool at `~/repos/cf-cli` has a bug in its authentication handling and argument parsing (`config set`). Do not use it.
+The bespoke `cf-cli` tool at `~/repos/cf-cli` is the primary method for interacting with Cloudflare.
 
-**Use direct `curl` commands instead.**
+**Authentication:**
+The tool uses the `CLOUDFLARE_API_TOKEN` and `CF_ACCOUNT_ID` environment variables, which are configured in `~/.openclaw/.env` and loaded by the gateway.
 
 - **Account ID:** `6d2cc54a1421057aa2052c7eb1d2ad20`
+
+**Usage:**
+All commands should be run via the source file using `bun`.
+
 - **List Tunnels:**
   ```bash
-  curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/6d2cc54a1421057aa2052c7eb1d2ad20/cfd_tunnel" \
-    -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-    | jq
+  ~/.bun/bin/bun run ~/repos/cf-cli/src/index.ts tunnels list
   ```
 
 Add whatever helps you do your job. This is your cheat sheet.
