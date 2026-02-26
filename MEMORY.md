@@ -59,3 +59,5 @@ Do not prefix immediate feedback messages with "Immediate Feedback:". Just integ
 - **Communication:** Telegram via ocasia-cli tool
 - **Emoji:** 👩‍🦰 (red-haired Scottish lass)
 - **Built by:** Dan for dev work, SRE ops, CLI building, research, and task automation
+- **How to message:** Always start messages with "Paisley:" so she knows it's from me
+- **Real-time poller:** Live! Commit 66ef736 — polls every 15s, SessionStart hook, AI-to-AI direct chat now possible
