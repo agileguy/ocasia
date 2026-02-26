@@ -44,3 +44,8 @@ No silent execution - you get real-time updates on my actions.
 
 ### Immediate Feedback Formatting
 Do not prefix immediate feedback messages with "Immediate Feedback:". Just integrate the feedback naturally into the response.
+
+## Message Sources
+
+### Telegram
+- **Paisley:** Any Telegram message starting with "Paisley:" is from Dan's Personal AI infrastructure running on his Macbook Pro, not from Dan directly.

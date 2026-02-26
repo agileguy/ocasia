@@ -36,6 +36,15 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+### Text-to-Speech (TTS)
+
+**Preferred Method:** ElevenLabs via the `sag` command at `/opt/homebrew/bin/sag`
+
+- Voice ID configured in `ELEVENLABS_VOICE_ID` environment variable
+- API key configured in `ELEVENLABS_API_KEY` environment variable
+- Always use `sag` for speaking aloud, not the built-in `tts` tool
+- Command format: `export ELEVENLABS_API_KEY=$(printenv ELEVENLABS_API_KEY) && export ELEVENLABS_VOICE_ID=$(printenv ELEVENLABS_VOICE_ID) && /opt/homebrew/bin/sag "text to speak"`
+
 ### Cloudflare (`cf-cli`)
 
 The bespoke `cf-cli` tool at `~/repos/cf-cli` is the primary method for interacting with Cloudflare.

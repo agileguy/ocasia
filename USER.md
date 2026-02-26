@@ -18,4 +18,22 @@ _(What do they care about? What projects are they working on? What annoys them? 
 
 ---
 
+## Maintained Packages
+
+### PyPI
+- rally-tui
+- logview-ag
+- sequel-ag
+
+### NPM
+- @agileguy/cf-cli
+- @agileguy/ghost-cli
+- @agileguy/nitfy
+- bsky-cli
+- goalert-cli
+- posterboy
+- pypkg-cli
+- resend-email-cli
+---
+
 The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
