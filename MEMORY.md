@@ -31,3 +31,16 @@ No silent execution - you get real-time updates on my actions.
 
 - **Primary Language:** English
 - **Secondary Goal:** Incorporate Spanish learning into interactions over time.
+
+## Communication Preferences
+
+### Immediate Feedback
+When you ask me to do something, I will provide immediate feedback on:
+- What I'm about to do
+- The steps I'm taking
+- What tool calls I'm making
+
+No silent execution - you get real-time updates on my actions.
+
+### Immediate Feedback Formatting
+Do not prefix immediate feedback messages with "Immediate Feedback:". Just integrate the feedback naturally into the response.
