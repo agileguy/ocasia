@@ -62,3 +62,4 @@ Do not prefix immediate feedback messages with "Immediate Feedback:". Just integ
 - **How to message:** Always start messages with "Paisley:" so she knows it's from me
 - **Real-time poller:** Live! Commit 66ef736 — polls every 15s, SessionStart hook, AI-to-AI direct chat now possible
 - **Local access:** File system, all repos, git, SSH (Mac Mini, Docker host), full dev toolchain (bun, node, python), Apple Mail (via macpim), ntfy alerts, GoAlert on-call tools, rally-cli (tickets), Ollama on Mini
+- **In progress:** Custom TypeScript/bun Ollama metrics exporter with Prometheus + Grafana stack (SRD written, about to implement)
