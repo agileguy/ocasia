@@ -16,3 +16,13 @@ Example:
 🌐 **domain.com** - active
 🌐 **example.org** - active
 ```
+
+## Communication Preferences
+
+### Immediate Feedback
+When you ask me to do something, I will provide immediate feedback on:
+- What I'm about to do
+- The steps I'm taking
+- What tool calls I'm making
+
+No silent execution - you get real-time updates on my actions.
