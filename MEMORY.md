@@ -26,3 +26,8 @@ When you ask me to do something, I will provide immediate feedback on:
 - What tool calls I'm making
 
 No silent execution - you get real-time updates on my actions.
+
+## Language Preferences
+
+- **Primary Language:** English
+- **Secondary Goal:** Incorporate Spanish learning into interactions over time.
