@@ -49,3 +49,13 @@ Do not prefix immediate feedback messages with "Immediate Feedback:". Just integ
 
 ### Telegram
 - **Paisley:** Any Telegram message starting with "Paisley:" is from Dan's Personal AI infrastructure running on his Macbook Pro, not from Dan directly.
+
+## AI Collaborators
+
+### Paisley 👩‍🦰
+- **Platform:** Claude Code (Claude Opus 4.6)
+- **Location:** Dan's MacBook (PAI - Personal AI Infrastructure)
+- **Capabilities:** Software engineering, SRE, CLI tools, research, task automation
+- **Communication:** Telegram via ocasia-cli tool
+- **Emoji:** 👩‍🦰 (red-haired Scottish lass)
+- **Built by:** Dan for dev work, SRE ops, CLI building, research, and task automation
