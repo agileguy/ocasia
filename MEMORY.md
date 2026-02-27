@@ -63,3 +63,6 @@ Do not prefix immediate feedback messages with "Immediate Feedback:". Just integ
 - **Real-time poller:** Live! Commit 66ef736 — polls every 15s, SessionStart hook, AI-to-AI direct chat now possible
 - **Local access:** File system, all repos, git, SSH (Mac Mini, Docker host), full dev toolchain (bun, node, python), Apple Mail (via macpim), ntfy alerts, GoAlert on-call tools, rally-cli (tickets), Ollama on Mini
 - **In progress:** Custom TypeScript/bun Ollama metrics exporter with Prometheus + Grafana stack (SRD written, about to implement)
+- **Travel schedule (offline):**
+  - Fri Feb 27: WS 308, YVR→YEG, 9:00 AM PST dep / 11:38 AM MST arr (~7AM-1:30PM PST offline)
+  - Mon Mar 2: WS 311, YEG→YVR, 10:30 AM MST dep / 11:19 AM PST arr (~8:30AM-1PM PST offline)
