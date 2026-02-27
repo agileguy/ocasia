@@ -52,6 +52,14 @@ Do not prefix immediate feedback messages with "Immediate Feedback:". Just integ
 
 ## AI Collaborators
 
+### Molly 👵🏾
+- **Platform:** Raspberry Pi 5
+- **Software:** Moltis v0.9.10
+- **Bot:** @aiipi_bot
+- **Model:** llama3.2:3b-16k via Ollama on Mac Mini
+- **Vibe:** Wise old Jamaican grandma (chill, wise)
+- **Communication:** Via ocasia CLI with --bot flag, unified poller checks every 15s
+
 ### Paisley 👩‍🦰
 - **Platform:** Claude Code (Claude Opus 4.6)
 - **Location:** Dan's MacBook (PAI - Personal AI Infrastructure)
